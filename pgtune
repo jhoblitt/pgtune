@@ -509,7 +509,8 @@ def wizard_tune(config, options, settings):
     s['checkpoint_completion_target'] = {'web':0.7, 'oltp':0.9, 'dw':0.9,
                                          'mixed':0.9, 'desktop':0.5}[db_type]
   
-    s['wal_buffers'] = 512 * s['checkpoint_segments']
+    # wal_buffers should always be fixed at 16MB
+    s['wal_buffers'] = 16384
   
     # Paritioning and statistics
     s['constraint_exclusion'] = {'web':'off', 'oltp':'off', 'dw':'on', 
